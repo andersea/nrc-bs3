@@ -1,0 +1,73 @@
+{
+  "name": "aea-nrc-bs3",
+  "version": "0.0.1",
+  "description": "Node-RED nodes for accessing Sqlite3 Db using better-sqlite3 npm module.",
+  "license": "MIT",
+  "repository": "https://github.com/andersea/nrc-bs3",
+  "author": {
+    "name": "Anders E. Andersen",
+    "email": "andersa@atlab.dk",
+    "url": "https://github.com/andersea"
+  },
+  "keywords": [
+    "sqlite",
+    "better-sqlite3"
+  ],
+  "files": [
+    "lib"
+  ],
+  "main": "lib/better-sqlite3.js",
+  "typings": "lib/better-sqlite3.d.ts",
+  "scripts": {
+    "clean": "rimraf lib && rimraf coverage",
+    "lint": "tslint --force --format verbose \"src/**/*.ts\"",
+    "prepublishOnly": "npm run build",
+    "postinstall": "scripts/postinstall.js",
+    "prebuild": "npm run clean && npm run lint && echo Using TypeScript && tsc --version",
+    "build": "tsc --pretty",
+    "postbuild": "cp -r icons lib && cp src/*.html lib",
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "watch": "npm run build -- --watch",
+    "watch:test": "jest --watch"
+  },
+  "dependencies": {
+    "better-sqlite3": "^4.0.2"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^3.1.1",
+    "@types/jest": "^20.0.5",
+    "@types/node": "^8.0.0",
+    "coveralls": "^2.0.0",
+    "jest": "^20.0.4",
+    "jest-environment-node-debug": "^2.0.0",
+    "node-red": "^0.17.5",
+    "prettier": "^1.5.2",
+    "rimraf": "^2.0.0",
+    "ts-jest": "^20.0.7",
+    "ts-node": "^3.2.0",
+    "tslint": "^5.0.0",
+    "tslint-config-prettier": "^1.1.0",
+    "typescript": "^2.3.0"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "jest": {
+    "transform": {
+      ".(ts)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "testEnvironment": "node"
+  },
+  "node-red": {
+    "nodes": {
+      "better-sqlite3": "lib/better-sqlite3.js",
+      "better-sqlite3-config": "lib/better-sqlite3-config.js"
+    }
+  }
+}
