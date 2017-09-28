@@ -1,11 +1,10 @@
-
-<script type="text/x-red" data-template-name="better-sqlite3">
+<script type="text/x-red" data-template-name="bs3-all">
     <div class="form-row">
         <label for="node-input-config"><i class="fa fa-database"></i> Database</label>
         <input type="text" id="node-input-config">
     </div>
     <div class="form-row node-text-editor-row">
-        <label for="node-input-query"><i class="fa fa-database"></i> SQL</label>
+        <label for="node-input-query"><i class="fa fa-database"></i> Select Statement</label>
         <div style="height: 250px; min-height:150px;" class="node-text-editor" id="node-input-query"></div>
     </div>
     <div class="form-row">
@@ -14,20 +13,21 @@
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="better-sqlite3">
-    <p>Executes a prepared statement.</p>
-    <p>This node uses the <b>db.all</b> operation against the configured database</p>
-    <p>The result is returned in <code>msg.payload</code>.</p>
-    <p><code>msg.payload</code> can contain an array of values to bind to the topic.</p>
-    <p>Typically the returned payload will be an array of the result rows, (or an error).</p>
-</script>
+<script type="text/x-red" data-help-name="bs3-all">
+    <p>Executes a prepared statement using the all method.</p>
+    <p>The query to execute is entered in the <code>Query</code> field in node properties.</p>
+    <p><code>msg.payload</code> can contain parameters to bind on execution.</p>
+    <p>The result is returned in <code>msg.payload</code>. Typically the returned payload will be an array of the result rows,
+        (or an error).</p>
+    <p>See better-sqlite3 <a href="https://github.com/JoshuaWise/better-sqlite3/wiki/API#allbindparameters---array-of-rows">api docs</a> for more info.</p>
+</script>   
 
 <script type="text/javascript">
-    RED.nodes.registerType('better-sqlite3', {
+    RED.nodes.registerType('bs3-all', {
         category: 'storage',
-        color: "#b79e00",
+        color: "#3FADB5",
         defaults: {
-            config: { type: "better-sqlite3-config", required: true },
+            config: { type: "bs3-config", required: true },
             query: { value: "" },
             name: { value: "" }
         },
@@ -36,7 +36,7 @@
         icon: "sqlite.png",
         label: function () {
             var configNode = RED.nodes.node(this.config);
-            return this.name || (configNode ? configNode.label() : "better-sqlite3");
+            return this.name || (configNode ? configNode.label() : "bs3-all");
         },
         labelStyle: function () {
             return this.name ? "node_label_italic" : "";

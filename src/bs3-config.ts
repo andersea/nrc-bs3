@@ -1,9 +1,9 @@
 import sqlite3 = require('better-sqlite3');
-import { Node, Red } from 'node-red';
-import { ISqliteConfigNode, ISqliteConfigNodeProperties } from './common';
+import { Red } from 'node-red';
+import { ISqliteConfigNode, ISqliteConfigNodeProperties } from './bs3-common';
 
 export = (RED: Red) => {
-    RED.nodes.registerType('better-sqlite3-config', function (this: ISqliteConfigNode, props: ISqliteConfigNodeProperties) {
+    RED.nodes.registerType('bs3-config', function (this: ISqliteConfigNode, props: ISqliteConfigNodeProperties) {
         RED.nodes.createNode(this, props);
         this.db = new sqlite3(props.filename);
         this.on('close', () => {

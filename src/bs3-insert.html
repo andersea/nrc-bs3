@@ -1,0 +1,67 @@
+<script type='text/x-red' data-template-name='bs3-insert'>
+    <div class='form-row'>
+        <label for='node-input-config'><i class='fa fa-database'></i> Database</label>
+        <input type='text' id='node-input-config'>
+    </div>
+    <div class='form-row'>
+        <label for='node-input-mode'><i class='fa fa-server'></i> Mode</label>
+        <select type='text' id='node-input-mode'>
+           <option value='auto'>Auto</option>
+           <option value='query'>Query</option>
+        </select>
+    </div>
+    <div class='form-row' id='node-form-row-create'>
+        <label>&nbsp;</label>
+        <input type='checkbox' id='node-input-create' placeholder='Create' style='display: inline-block; width: auto; vertical-align: top;'>
+        <label for='node-input-create' style='width: 70%;'><span>auto create table</span></label>
+    </div>
+    <div class='form-row node-text-editor-row'>
+        <label for='node-input-query'><i class='fa fa-database'></i> Insert statement</label>
+        <div style='height: 250px; min-height:150px;' class='node-text-editor' id='node-input-query'></div>
+    </div>
+    <div class='form-row'>
+        <label for='node-input-name'><i class='fa fa-tag'></i> Name</label>
+        <input type='text' id='node-input-name' placeholder='Name'>
+    </div>
+</script>
+
+<script type='text/x-red' data-help-name='bs3-insert'>
+    <p>Executes an automatic insert statement.</p>
+    <p>The node takes <code>msg.payload</code> of properties and values and converts the property names into column names and
+        inserts the values as column values into the table given by <code>msg.topic</code>.</p>
+    <p>The node has an option of creating a table automatically, if it doesn't exist already.</p>
+    <p>Table creation follows these rules:</p>
+    <ul>
+        <li>If a property named 'id' exists, it will be asumed to contain the primary key and a column of type <code>INTEGER PRIMARY KEY<code> will be created.</li>
+        <li>If a property value satisfies <code>Number.isInteger()</code>, the column type becomes <code>INTEGER</code>.</li>
+        <li>If a property value satisfies <code>Number.isNaN</code>, the column type becomes <code>TEXT</code>.</li>
+        <li>Otherwise the column type becomes <code>REAL</code>.</li>
+    </ul>
+    <p>DANGER: This node generates dynamic SQL and has a wide attack surface for SQL injection, especially when first executed.
+        Subsequent input events uses a prepared statement and parameter binding to insert values, and are comparably a lot
+        safer.
+    </p>
+</script>
+
+<script type='text/javascript'>
+    RED.nodes.registerType('bs3-insert', {
+        category: 'storage',
+        color: '#3FADB5',
+        defaults: {
+            config: { type: 'bs3-config', required: true },
+            create: { value: false },
+            name: { value: '' }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: 'sqlite.png',
+        label: function () {
+            var configNode = RED.nodes.node(this.config);
+            return this.name || (configNode ? configNode.label() : 'bs3-insert');
+        },
+        labelStyle: function () {
+            return this.name ? 'node_label_italic' : '';
+        },
+    });
+
+</script>

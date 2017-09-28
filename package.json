@@ -16,16 +16,16 @@
   "files": [
     "lib"
   ],
-  "main": "lib/better-sqlite3.js",
-  "typings": "lib/better-sqlite3.d.ts",
+  "main": "lib/bs3-all.js",
+  "typings": "lib/bs3-all.d.ts",
   "scripts": {
     "clean": "rimraf lib && rimraf coverage",
     "lint": "tslint --force --format verbose \"src/**/*.ts\"",
     "prepublishOnly": "npm run build",
-    "postinstall": "scripts/postinstall.js",
+    "debugenv": "scripts/debugenv.js",
     "prebuild": "npm run clean && npm run lint && echo Using TypeScript && tsc --version",
     "build": "tsc --pretty",
-    "postbuild": "cp -r icons lib && cp src/*.html lib",
+    "postbuild": "cpy icons/* lib --parents && cpy src/*.html lib",
     "test": "jest",
     "coverage": "jest --coverage",
     "watch": "npm run build -- --watch",
@@ -39,11 +39,10 @@
     "@types/jest": "^20.0.5",
     "@types/node": "^8.0.0",
     "coveralls": "^2.0.0",
+    "cpy-cli": "^1.0.1",
     "jest": "^20.0.4",
     "jest-environment-node-debug": "^2.0.0",
     "node-red": "^0.17.5",
-    "prettier": "^1.5.2",
-    "rimraf": "^2.0.0",
     "ts-jest": "^20.0.7",
     "ts-node": "^3.2.0",
     "tslint": "^5.0.0",
@@ -66,8 +65,10 @@
   },
   "node-red": {
     "nodes": {
-      "better-sqlite3": "lib/better-sqlite3.js",
-      "better-sqlite3-config": "lib/better-sqlite3-config.js"
+      "bs3-all": "lib/bs3-all.js",
+      "bs3-insert": "lib/bs3-insert.js",
+      "bs3-run": "lib/bs3-run.js",
+      "bs3-config": "lib/bs3-config.js"
     }
   }
 }

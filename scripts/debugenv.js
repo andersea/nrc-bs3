@@ -1,17 +1,16 @@
 #!/usr/bin/node
-const fs = require('fs');
+const fs = require('fs-extra');
 const { execFileSync } = require('child_process');
 const { join } = require('path');
 
 const pkgName = require('../package.json').name; 
 const nodeRedUserDir = join(process.cwd(), '.node-red');
-const lockFilename = join(nodeRedUserDir, '.postinstall-lock');
+const lockFilename = join(nodeRedUserDir, '.debugenv-lock');
 const nodeRedUserDirModules = join(nodeRedUserDir, 'node_modules');
 
 if (!fs.existsSync(join(nodeRedUserDirModules, pkgName)) &&
     !fs.existsSync(lockFilename)) {
-    fs.mkdirSync(nodeRedUserDir);
-    fs.mkdirSync(nodeRedUserDirModules);
+    fs.ensureDirSync(nodeRedUserDirModules);
     lck = fs.openSync(lockFilename, 'w');
 
     try {
