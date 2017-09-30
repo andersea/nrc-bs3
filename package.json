@@ -32,10 +32,11 @@
     "watch:test": "jest --watch"
   },
   "dependencies": {
-    "better-sqlite3": "^4.0.2"
+    "better-sqlite3": "^4.0.2",
+    "fast-isnumeric": "^1.1.1"
   },
   "devDependencies": {
-    "@types/better-sqlite3": "^3.1.1",
+    "@types/better-sqlite3": "^3.1.2",
     "@types/jest": "^20.0.5",
     "@types/node": "^8.0.0",
     "coveralls": "^2.0.0",
@@ -65,10 +66,10 @@
   },
   "node-red": {
     "nodes": {
-      "bs3-all": "lib/bs3-all.js",
-      "bs3-insert": "lib/bs3-insert.js",
-      "bs3-run": "lib/bs3-run.js",
-      "bs3-config": "lib/bs3-config.js"
+      "sqlite-all": "lib/bs3-all.js",
+      "sqlite-insert": "lib/bs3-insert.js",
+      "sqlite-run": "lib/bs3-run.js",
+      "sqlite-config": "lib/bs3-config.js"
     }
   }
 }

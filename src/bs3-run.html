@@ -1,11 +1,14 @@
-<script type='text/x-red' data-template-name='bs3-run'>
+<script type='text/x-red' data-template-name='sqlite-run'>
     <div class='form-row'>
         <label for='node-input-config'><i class='fa fa-database'></i> Database</label>
         <input type='text' id='node-input-config'>
     </div>
+    <div class="form-row" style="margin-bottom: 0px;">
+        <label for="node-input-query" style="width: 100% !important;"><i class='fa fa-database'></i> SQL Query</label>
+        <input type="hidden" id="node-input-query" autofocus="autofocus">
+    </div>
     <div class='form-row node-text-editor-row'>
-        <label for='node-input-query'><i class='fa fa-database'></i> Insert statement</label>
-        <div style='height: 250px; min-height:150px;' class='node-text-editor' id='node-input-query'></div>
+        <div style='height: 250px; min-height:150px;' class='node-text-editor' id='node-input-query-editor'></div>
     </div>
     <div class='form-row'>
         <label for='node-input-name'><i class='fa fa-tag'></i> Name</label>
@@ -13,7 +16,7 @@
     </div>
 </script>
 
-<script type='text/x-red' data-help-name='bs3-run'>
+<script type='text/x-red' data-help-name='sqlite-run'>
     <p>Executes a prepared statement using the run method.</p>
     <p>The query to execute is entered in the <code>Query</code> field in node properties.</p>
     <p><code>msg.payload</code> can contain parameters to bind on execution.</p>
@@ -22,11 +25,11 @@
 </script>
 
 <script type='text/javascript'>
-    RED.nodes.registerType('bs3-run', {
+    RED.nodes.registerType('sqlite-run', {
         category: 'storage',
         color: '#3FADB5',
         defaults: {
-            config: { type: 'bs3-config', required: true },
+            config: { type: 'sqlite-config', required: true },
             query: { value: '' },
             name: { value: '' }
         },
@@ -34,11 +37,26 @@
         outputs: 1,
         icon: 'sqlite.png',
         label: function () {
-            var configNode = RED.nodes.node(this.config);
-            return this.name || (configNode ? configNode.label() : 'bs3-run');
+            return this.name || 'Run';
         },
         labelStyle: function () {
             return this.name ? 'node_label_italic' : '';
+        },
+        oneditprepare: function () {
+            this.editor = RED.editor.createEditor({
+                id: 'node-input-query-editor',
+                mode: 'ace/mode/sql',
+                value: $("#node-input-query").val()
+            });
+        },
+        oneditsave: function() {
+            $("#node-input-query").val(this.editor.getValue());
+            this.editor.destroy();
+            delete this.editor;
+        },
+        oneditcancel: function() {
+            this.editor.destroy();
+            delete this.editor;
         },
     });
 

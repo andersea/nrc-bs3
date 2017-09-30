@@ -14,7 +14,7 @@
         "${workspaceRoot}/.node-red",
         "-v"
       ],
-      "cwd": "${workspaceRoot}",
+      "cwd": "${workspaceRoot}/.node-red",
       "sourceMaps": true,
       "smartStep": false,
       "preLaunchTask": "build",

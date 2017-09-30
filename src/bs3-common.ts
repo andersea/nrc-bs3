@@ -17,6 +17,7 @@ export interface IPreparedQueryNodeProperties extends NodeProperties {
 export interface IInsertNodeProperties extends NodeProperties {
     config: NodeId;
     create: boolean;
+    table: string;
 }
 
 export function preparedStatementGuard(preparedStatementNode: Node, configNode: Node, props: IPreparedQueryNodeProperties){

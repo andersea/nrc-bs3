@@ -22,14 +22,27 @@ export default function (method: methods, RED: Red) {
             return this.error('No query configured');
         }
         const prepared = configNode.db.prepare(props.query);
+        let noParamsExpected: boolean;
+
         if (prepared.returnsData === mustReturnData(method)) {
             this.on('input', (msg: any) => {
                 try {
-                    msg.payload = prepared[method](msg.payload);
+                    msg.payload = noParamsExpected ? prepared[method]() : prepared[method](msg.payload);
                     this.send(msg);
                 } catch (error) {
-                    this.error(error, msg);
-                    this.send(null);
+                    if (error.message === "Too many parameter values were provided") {
+                        try {
+                            msg.payload = prepared[method]();
+                            noParamsExpected = true;
+                            this.send(msg);
+                        } catch (error) {
+                            this.error(error, msg);
+                            this.send(null);
+                        }
+                    } else {
+                        this.error(error, msg);
+                        this.send(null);
+                    }
                 }
             });
         } else {

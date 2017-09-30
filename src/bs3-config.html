@@ -1,4 +1,4 @@
-<script type="text/x-red" data-template-name="bs3-config">
+<script type="text/x-red" data-template-name="sqlite-config">
     <div class="form-row">
         <label for="node-config-input-filename"><i class="fa fa-database"></i> Database</label>
         <input type="text" id="node-config-input-filename" placeholder="/tmp/sqlite">
@@ -6,7 +6,7 @@
 </script>
 
 <script type="text/javascript">
-    RED.nodes.registerType('bs3-config', {
+    RED.nodes.registerType('sqlite-config', {
         category: 'config',
         defaults: {
             filename: { value: "", required: true }
