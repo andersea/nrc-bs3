@@ -1,6 +1,6 @@
 {
   "name": "aea-nrc-bs3",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Node-RED nodes for accessing Sqlite3 Db using better-sqlite3 npm module.",
   "license": "MIT",
   "repository": "https://github.com/andersea/nrc-bs3",
