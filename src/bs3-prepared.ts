@@ -15,7 +15,7 @@ export default function (method: methods, RED: Red) {
         RED.nodes.createNode(this, props);
 
         const configNode = RED.nodes.getNode(props.config) as ISqliteConfigNode;
-        if (!configNode) {
+        if (!(configNode && configNode.db)) {
             return this.error('Sqlite database not configured');
         }
         if (!props.query) {
