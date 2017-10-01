@@ -21,8 +21,9 @@
 <script type='text/x-red' data-help-name='sqlite-insert'>
     <p>Executes an automatic insert statement.</p>
     <p>The node takes <code>msg.payload</code> of properties and values and converts the property names into column names and
-        inserts the values as column values into the table given by the table property. Alternatively if the table property is
-        left empty, the table name can be set on a message by message basis, using <code>msg.topic</code>.</p>
+        inserts the values as column values into the table given by the table property. Alternatively if the table property
+        is left empty, the table name can be set on a message by message basis, using <code>msg.topic</code>, making it possible
+        to insert into many different tables with a single node.</p>
     <p>The node has an option of creating a table automatically, if it doesn't exist already.</p>
     <p>Table creation follows these rules:</p>
     <ul>
