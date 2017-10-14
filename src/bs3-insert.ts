@@ -44,7 +44,7 @@ function createTable(tableName: string, payload: IPayload, db: sqlite) {
 
 function makeTableInserter(tableName: string, payloadKeys: string[], db: sqlite) {
     const statement = db.prepare(
-        `INSERT INTO ${tableName} (${payloadKeys.join(',')}) VALUES (${payloadKeys.map(key => ':' + key).join(',')})`);
+        `INSERT INTO ${tableName} ("${payloadKeys.join('","')}") VALUES (:${payloadKeys.join(',:')})`);
 
     return (payload: IPayload) => {
         return statement.run(payload);
