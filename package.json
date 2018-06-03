@@ -1,6 +1,6 @@
 {
-  "name": "aea-nrc-bs3",
-  "version": "0.0.7",
+  "name": "@andersea/nrc-bs3",
+  "version": "0.1.0",
   "description": "Node-RED nodes for accessing Sqlite3 Db using better-sqlite3 npm module.",
   "license": "MIT",
   "repository": "https://github.com/andersea/nrc-bs3",
@@ -32,23 +32,23 @@
     "watch:test": "jest --watch"
   },
   "dependencies": {
-    "better-sqlite3": "^4.0.2",
+    "better-sqlite3": "^4.1.1",
     "fast-isnumeric": "^1.1.1"
   },
   "devDependencies": {
-    "@types/better-sqlite3": "^3.1.2",
+    "@types/better-sqlite3": "^3.1.3",
     "@types/jest": "^20.0.5",
-    "@types/node": "^8.0.0",
-    "coveralls": "^2.0.0",
+    "@types/node": "^8.10.18",
+    "coveralls": "^2.13.3",
     "cpy-cli": "^1.0.1",
     "jest": "^20.0.4",
     "jest-environment-node-debug": "^2.0.0",
     "node-red": "^0.17.5",
     "ts-jest": "^20.0.7",
     "ts-node": "^3.2.0",
-    "tslint": "^5.0.0",
-    "tslint-config-prettier": "^1.1.0",
-    "typescript": "^2.3.0"
+    "tslint": "^5.10.0",
+    "tslint-config-prettier": "^1.13.0",
+    "typescript": "^2.9.1"
   },
   "engines": {
     "node": ">=6.0.0"
