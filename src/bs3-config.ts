@@ -8,7 +8,9 @@ export = (RED: Red) => {
     RED.nodes.registerType('sqlite-config', function (this: ISqliteConfigNode, props: ISqliteConfigNodeProperties) {
         RED.nodes.createNode(this, props);
         try {
-            this.db = new sqlite3(props.filename);            
+            this.db = new sqlite3(props.filename, {
+                memory: props.memory
+            });            
         } catch (error) {
             if(error.code === "SQLITE_CANTOPEN") {
                  this.error(`${error.name}: ${error.message} ${resolve(props.filename)}`);

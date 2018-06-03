@@ -3,13 +3,19 @@
         <label for="node-config-input-filename"><i class="fa fa-database"></i> Database</label>
         <input type="text" id="node-config-input-filename" placeholder="/tmp/sqlite">
     </div>
+    <div class='form-row'>
+        <label>&nbsp;</label>
+        <input type='checkbox' id='node-input-memory' placeholder='Memory' style='display: inline-block; width: auto; vertical-align: top;'>
+        <label for='node-input-memory' style='width: 70%;'><span>In memory database</span></label>
+    </div>
 </script>
 
 <script type="text/javascript">
     RED.nodes.registerType('sqlite-config', {
         category: 'config',
         defaults: {
-            filename: { value: "", required: true }
+            filename: { value: "", required: true },
+            memory: { value: false }
         },
         label: function () {
             return this.filename;

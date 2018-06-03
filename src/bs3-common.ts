@@ -7,6 +7,7 @@ export interface ISqliteConfigNode extends Node {
 
 export interface ISqliteConfigNodeProperties extends NodeProperties {
     filename: string;
+    memory: boolean;
 }
 
 export interface IPreparedQueryNodeProperties extends NodeProperties {
